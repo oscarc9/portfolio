@@ -1,0 +1,250 @@
+/* ===== SIDEBAR NAVIGATION (GAUCHE) ===== */
+.sidebar {
+    width: 280px;
+    background-color: #2d2d2d;
+    border-right: 1px solid #404040;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.logo {
+    padding: 1.5rem;
+    border-bottom: 1px solid #404040;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+}
+
+.profile-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid #4a9eff;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.logo-text {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #4a9eff;
+    text-decoration: none;
+}
+
+/* Navigation principale */
+.navbar {
+    list-style: none;
+    padding: 1rem 0;
+}
+
+.navbar li {
+    margin-bottom: 0.25rem;
+}
+
+.navbar li a {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.5rem;
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.navbar li a:hover {
+    background-color: #3a3a3a;
+    color: #4a9eff;
+    border-left-color: #4a9eff;
+}
+
+.navbar li a i:first-child {
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Checkboxes cachées pour les sous-menus */
+.submenu-toggle {
+    display: none;
+}
+
+.has-submenu label {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.5rem;
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    cursor: pointer;
+}
+
+.has-submenu label:hover {
+    background-color: #3a3a3a;
+    color: #4a9eff;
+    border-left-color: #4a9eff;
+}
+
+.has-submenu label i:first-child {
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Flèches pour les sous-menus */
+.arrow {
+    margin-left: auto;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.submenu-toggle:checked + label .arrow {
+    transform: rotate(180deg);
+}
+
+/* Sous-menus niveau 1 */
+.submenu {
+    list-style: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: #1a1a1a;
+}
+
+.submenu-toggle:checked ~ .submenu {
+    max-height: 500px;
+}
+
+.submenu li a {
+    display: block;
+    padding: 0.75rem 1.5rem 0.75rem 3rem;
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.submenu li a:hover {
+    background-color: #2d2d2d;
+    color: #4a9eff;
+    padding-left: 3.5rem;
+}
+
+/* Sous-menus niveau 2 (E5, E6) */
+.submenu-level2 {
+    list-style: none;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: #151515;
+}
+
+.submenu-toggle:checked ~ .submenu-level2 {
+    max-height: 500px;
+}
+
+.submenu .has-submenu label {
+    padding: 0.75rem 1.5rem 0.75rem 3rem;
+    color: #b0b0b0;
+    font-size: 0.9rem;
+}
+
+.submenu .has-submenu label i:first-child {
+    display: none;
+}
+
+.submenu .has-submenu label:hover {
+    background-color: #2d2d2d;
+    color: #4a9eff;
+    padding-left: 3.5rem;
+}
+
+.submenu-level2 li a {
+    padding-left: 4.5rem;
+    font-size: 0.85rem;
+}
+
+.submenu-level2 li a:hover {
+    padding-left: 5rem;
+}
+
+/* Footer de la sidebar */
+.nav-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    border-top: 1px solid #404040;
+    background-color: #2d2d2d;
+}
+
+.admin-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: #b0b0b0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.admin-link:hover {
+    background-color: #3a3a3a;
+    color: #4a9eff;
+}
+
+/* Menu toggle (mobile) */
+#menu-toggle {
+    display: none;
+}
+
+.menu-icon {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    font-size: 2rem;
+    color: #e0e0e0;
+    cursor: pointer;
+    z-index: 1001;
+    background-color: #2d2d2d;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #404040;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    #menu-toggle:checked ~ .sidebar {
+        transform: translateX(0);
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .navbar li a {
+        padding: 1rem 1.5rem;
+    }
+}
+

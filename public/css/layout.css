@@ -1,0 +1,41 @@
+/* ===== RESET & BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ===== CONTENU PRINCIPAL ===== */
+.main-content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+.top-header {
+    margin-bottom: 2rem;
+}
+
+.top-header h1 {
+    font-size: 2rem;
+    color: #4a9eff;
+    font-weight: 600;
+}
+
+/* ===== RESPONSIVE - MOBILE ===== */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+}
+
