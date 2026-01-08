@@ -11,7 +11,7 @@ include '../src/views/includes/sidebar.php';
             <h1>Ma passion : la cybersécurité</h1>
             <p>
                 Au fil des deux années de BTS SIO, j'ai progressivement choisi de m'orienter vers la <strong>cybersécurité</strong>.
-                Cette passion est née de ma curiosité pour comprendre comment protéger les systèmes et les données.
+                Cette passion est née de ma curiosité pour comprendre comment attaquer et protéger les systèmes et les données.
             </p>
         </header>
 
@@ -20,7 +20,7 @@ include '../src/views/includes/sidebar.php';
             <p>
                 En commençant le BTS SIO option SLAM, j'étais principalement intéressé par le développement web et les applications.
                 Cependant, au cours de ma formation, j'ai découvert que ce qui me passionnait vraiment, c'était comprendre les failles de sécurité,
-                analyser les vulnérabilités et mettre en place des solutions pour protéger les systèmes informatiques.
+                utiliser différents outils et techniques pour attaquer et protéger les systèmes et les données.
             </p>
             <p>
                 La cybersécurité combine plusieurs aspects qui m'attirent : l'analyse technique, la résolution de problèmes complexes,
@@ -29,51 +29,105 @@ include '../src/views/includes/sidebar.php';
         </div>
 
         <div class="bts-sio__block">
-            <h2>Ce qui m'attire dans la cybersécurité</h2>
-            <div class="passion-grid">
-                <div class="passion-item">
-                    <div class="passion-image-placeholder">
-                        <i class="ri-shield-check-line"></i>
-                        <p>Image à ajouter</p>
+            <h2>Voici ce sur quoi je me suis penché cette année et ce que j'ai appris</h2>
+            
+            <!-- Galerie de photos défilante CSS pure -->
+            <div class="carousel-wrapper">
+                <!-- Radio buttons cachés pour la navigation -->
+                <input type="radio" name="carousel" id="carousel-1" class="carousel-radio" checked>
+                <input type="radio" name="carousel" id="carousel-2" class="carousel-radio">
+                <input type="radio" name="carousel" id="carousel-3" class="carousel-radio">
+                <input type="radio" name="carousel" id="carousel-4" class="carousel-radio">
+                <input type="radio" name="carousel" id="carousel-5" class="carousel-radio">
+                <input type="radio" name="carousel" id="carousel-6" class="carousel-radio">
+                
+                <!-- Flèche précédente - visible selon le slide actif -->
+                <label for="carousel-6" class="carousel-arrow carousel-prev carousel-prev-1">
+                    <i class="ri-arrow-left-s-line"></i>
+                </label>
+                <label for="carousel-1" class="carousel-arrow carousel-prev carousel-prev-2">
+                    <i class="ri-arrow-left-s-line"></i>
+                </label>
+                <label for="carousel-2" class="carousel-arrow carousel-prev carousel-prev-3">
+                    <i class="ri-arrow-left-s-line"></i>
+                </label>
+                <label for="carousel-3" class="carousel-arrow carousel-prev carousel-prev-4">
+                    <i class="ri-arrow-left-s-line"></i>
+                </label>
+                <label for="carousel-4" class="carousel-arrow carousel-prev carousel-prev-5">
+                    <i class="ri-arrow-left-s-line"></i>
+                </label>
+                <label for="carousel-5" class="carousel-arrow carousel-prev carousel-prev-6">
+                    <i class="ri-arrow-left-s-line"></i>
+                </label>
+                
+                <!-- Container du carousel -->
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <div class="carousel-slide">
+                            <img src="<?php echo $basePath; ?>gallery/buffer.jpg" alt="Buffer Overflow">
+                            <div class="slide-caption">
+                                <h3>Buffer Overflow</h3>
+                                <p>Analyse et exploitation des débordements de tampon</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="<?php echo $basePath; ?>gallery/hydra.jpg" alt="Hydra">
+                            <div class="slide-caption">
+                                <h3>Hydra</h3>
+                                <p>Test de force brute et attaques par dictionnaire</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="<?php echo $basePath; ?>gallery/script.jpg" alt="Scripts de sécurité">
+                            <div class="slide-caption">
+                                <h3>Scripts de sécurité</h3>
+                                <p>Automatisation des tests de sécurité</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="<?php echo $basePath; ?>gallery/hack.jpg" alt="Hack phishing">
+                            <div class="slide-caption">
+                                <h3>Hack phishing</h3>
+                                <p>Attaque par phishing et récupération de mots de passe</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="<?php echo $basePath; ?>gallery/etudiant.jpg" alt="Etudiant">
+                            <div class="slide-caption">
+                                <h3>Salon de l'etudiant (Paris)</h3>
+                                <p>Salon de l'etudiant à Paris</p>
+                            </div>
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="<?php echo $basePath; ?>gallery/esme.jpg" alt="esme">
+                            <div class="slide-caption">
+                                <h3>Presentation ecole ESME</h3>
+                                <p>Presentation ecole esme pour bachelor(Paris)</p>
+                            </div>
+                        </div>
                     </div>
-                    <h3>Protection des systèmes</h3>
-                    <p>
-                        Comprendre comment sécuriser les applications et les infrastructures pour protéger les données sensibles.
-                    </p>
                 </div>
-
-                <div class="passion-item">
-                    <div class="passion-image-placeholder">
-                        <i class="ri-bug-line"></i>
-                        <p>Image à ajouter</p>
-                    </div>
-                    <h3>Analyse des vulnérabilités</h3>
-                    <p>
-                        Identifier et analyser les failles de sécurité pour mieux comprendre comment les corriger et les prévenir.
-                    </p>
-                </div>
-
-                <div class="passion-item">
-                    <div class="passion-image-placeholder">
-                        <i class="ri-search-line"></i>
-                        <p>Image à ajouter</p>
-                    </div>
-                    <h3>Investigation et forensique</h3>
-                    <p>
-                        Analyser les incidents de sécurité, tracer les attaques et comprendre les méthodes utilisées par les cybercriminels.
-                    </p>
-                </div>
-
-                <div class="passion-item">
-                    <div class="passion-image-placeholder">
-                        <i class="ri-lock-password-line"></i>
-                        <p>Image à ajouter</p>
-                    </div>
-                    <h3>Cryptographie et authentification</h3>
-                    <p>
-                        Étudier les mécanismes de chiffrement et les systèmes d'authentification pour sécuriser les communications.
-                    </p>
-                </div>
+                
+                <!-- Flèche suivante - visible selon le slide actif -->
+                <label for="carousel-2" class="carousel-arrow carousel-next carousel-next-1">
+                    <i class="ri-arrow-right-s-line"></i>
+                </label>
+                <label for="carousel-3" class="carousel-arrow carousel-next carousel-next-2">
+                    <i class="ri-arrow-right-s-line"></i>
+                </label>
+                <label for="carousel-4" class="carousel-arrow carousel-next carousel-next-3">
+                    <i class="ri-arrow-right-s-line"></i>
+                </label>
+                <label for="carousel-5" class="carousel-arrow carousel-next carousel-next-4">
+                    <i class="ri-arrow-right-s-line"></i>
+                </label>
+                <label for="carousel-6" class="carousel-arrow carousel-next carousel-next-5">
+                    <i class="ri-arrow-right-s-line"></i>
+                </label>
+                <label for="carousel-1" class="carousel-arrow carousel-next carousel-next-6">
+                    <i class="ri-arrow-right-s-line"></i>
+                </label>
             </div>
         </div>
 
@@ -91,36 +145,6 @@ include '../src/views/includes/sidebar.php';
         </div>
 
         <div class="bts-sio__block">
-            <h2>Galerie</h2>
-            <div class="passion-gallery">
-                <div class="gallery-item">
-                    <div class="gallery-image-placeholder">
-                        <i class="ri-image-line"></i>
-                        <p>Image 1 à ajouter</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-image-placeholder">
-                        <i class="ri-image-line"></i>
-                        <p>Image 2 à ajouter</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-image-placeholder">
-                        <i class="ri-image-line"></i>
-                        <p>Image 3 à ajouter</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <div class="gallery-image-placeholder">
-                        <i class="ri-image-line"></i>
-                        <p>Image 4 à ajouter</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="bts-sio__block">
             <h2>Mon objectif</h2>
             <p>
                 Mon objectif est de continuer après le BTS dans une voie orientée <strong>cybersécurité</strong> :
@@ -128,8 +152,31 @@ include '../src/views/includes/sidebar.php';
                 Je souhaite approfondir mes connaissances et contribuer à rendre le monde numérique plus sûr.
             </p>
         </div>
+
+        <div class="bts-sio__block">
+            <h2>Autres passions</h2>
+            <div class="autres-passions-grid">
+                <div class="passion-card">
+                    <h3>Autres passions</h3>
+                    <div class="passion-content">
+                        <!-- Contenu à compléter -->
+                    </div>
+                </div>
+                <div class="passion-card">
+                    <h3>Autres passions</h3>
+                    <div class="passion-content">
+                        <!-- Contenu à compléter -->
+                    </div>
+                </div>
+                <div class="passion-card">
+                    <h3>Autres passions</h3>
+                    <div class="passion-content">
+                        <!-- Contenu à compléter -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </main>
 
 <?php include '../src/views/includes/footer.php'; ?>
-
