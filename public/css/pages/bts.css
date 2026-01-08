@@ -418,6 +418,16 @@
     max-width: 700px;
     margin: 2rem auto;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Conteneur pour les flèches et le carousel */
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    display: flex;
     align-items: center;
     gap: 1rem;
 }
@@ -564,15 +574,13 @@
     display: block;
 }
 
+/* Légendes en dehors du container */
 .slide-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-    padding: 2rem;
+    display: none;
+    text-align: center;
+    padding: 1.5rem 0;
     color: #e0e0e0;
-    z-index: 2;
+    margin-top: 1rem;
 }
 
 .slide-caption h3 {
@@ -588,6 +596,16 @@
     margin: 0;
 }
 
+/* Afficher la légende correspondant au slide actif */
+#carousel-1:checked ~ .slide-caption-1,
+#carousel-2:checked ~ .slide-caption-2,
+#carousel-3:checked ~ .slide-caption-3,
+#carousel-4:checked ~ .slide-caption-4,
+#carousel-5:checked ~ .slide-caption-5,
+#carousel-6:checked ~ .slide-caption-6 {
+    display: block;
+}
+
 
 /* Grille pour autres passions */
 .autres-passions-grid {
@@ -597,13 +615,21 @@
     margin-top: 2rem;
 }
 
+.passion-item-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
 .passion-card {
     background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
     border: 1px solid #404040;
     border-radius: 12px;
-    padding: 2rem;
+    padding: 0;
     transition: all 0.3s ease;
-    min-height: 200px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .passion-card:hover {
@@ -612,12 +638,34 @@
     border-color: #4a9eff;
 }
 
+.passion-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
 .passion-card h3 {
-    color: #4a9eff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #ffffff;
     font-size: 1.3rem;
-    margin-bottom: 1rem;
+    margin: 0;
+    padding: 1rem 2rem;
     font-weight: 600;
     text-align: center;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.passion-item-wrapper p {
+    color: #b0b0b0;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    margin-bottom: 0;
 }
 
 .passion-content {

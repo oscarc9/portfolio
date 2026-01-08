@@ -154,25 +154,28 @@ include '../src/views/includes/sidebar.php';
         </div>
 
         <div class="bts-sio__block">
-            <h2>Autres passions</h2>
+            <h2>Autres centres d'intérêt</h2>
             <div class="autres-passions-grid">
-                <div class="passion-card">
-                    <h3>Autres passions</h3>
-                    <div class="passion-content">
-                        <!-- Contenu à compléter -->
+                <div class="passion-item-wrapper">
+                    <div class="passion-card">
+                        <img src="<?php echo $basePath; ?>gallery/gym.jpg" alt="Sport">
+                        <h3>Sport</h3>
                     </div>
+                    <p>j'aime faire du sport, je m'entraine depuis plusieurs années maintenant et cela ma grandement aider à rester concentré et motivé dans de nombreux domaines.</p>
                 </div>
-                <div class="passion-card">
-                    <h3>Autres passions</h3>
-                    <div class="passion-content">
-                        <!-- Contenu à compléter -->
+                <div class="passion-item-wrapper">
+                    <div class="passion-card">
+                        <img src="<?php echo $basePath; ?>gallery/projetjs.jpg" alt="Développement web">
+                        <h3>Développement web</h3>
                     </div>
+                    <p>j'ai longement apprécié faire du développement web lors de mon BTS, tester des bibliothèques, des apis et des frameworks.</p>
                 </div>
-                <div class="passion-card">
-                    <h3>Autres passions</h3>
-                    <div class="passion-content">
-                        <!-- Contenu à compléter -->
+                <div class="passion-item-wrapper">
+                    <div class="passion-card">
+                        <img src="<?php echo $basePath; ?>gallery/dev_perso.jpg" alt="Développement personnel">
+                        <h3>Développement personnel</h3>
                     </div>
+                    <p>j'aime beaucoup lire des livres, regarder des videos ou des podcast sur des sujets qui me plaisent.</p>
                 </div>
             </div>
         </div>
