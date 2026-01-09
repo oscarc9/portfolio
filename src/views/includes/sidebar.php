@@ -24,7 +24,7 @@ if (!isset($basePath)) {
         <li><a href="<?php echo $basePath; ?>main/accueil.php"><i class="ri-home-line"></i> Accueil</a></li>
         <li><a href="<?php echo $basePath; ?>pages/BTS.php"><i class="ri-book-line"></i> Présentation BTS SIO</a></li>
         
-        <li><a href="<?php echo $basePath; ?>pages/mon_profil.php"><i class="ri-user-line"></i> Mon profil</a></li>
+        <li><a href="<?php echo $basePath; ?>pages/mon_profil/presentation_perso.php"><i class="ri-user-line"></i> Mon profil</a></li>
         
         <li class="has-submenu">
             <input type="checkbox" id="submenu-competences" class="submenu-toggle">

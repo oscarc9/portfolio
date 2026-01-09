@@ -11,7 +11,8 @@ include '../src/views/includes/sidebar.php';
         <a href="#presentation" class="e5-nav-link">Présentation</a>
         <a href="#realisation1" class="e5-nav-link">Réalisation 1</a>
         <a href="#realisation2" class="e5-nav-link">Réalisation 2</a>
-        <a href="#comparaison" class="e5-nav-link">Comparaison</a>
+        <a href="#projet-personnel" class="e5-nav-link">Projet personnel</a>
+        <a href="#documentations" class="e5-nav-link">Documentations</a>
     </nav>
 
     <!-- Section 1: Présentation Épreuve E6 -->
@@ -233,17 +234,38 @@ include '../src/views/includes/sidebar.php';
         </div>
     </section>
 
-    <!-- Section 4: Comparaison des deux réalisations -->
-    <section class="bts-sio" id="comparaison">
+    <!-- Section 4: Projet personnel -->
+    <section class="bts-sio" id="projet-personnel">
         <header class="bts-sio__header">
-            <h1>Comparaison des deux réalisations</h1>
+            <h1>Projet personnel</h1>
             <p>
-                Analyse comparative des deux réalisations et des compétences mobilisées.
+                Projet personnel réalisé en dehors du cadre scolaire.
             </p>
         </header>
 
         <div class="bts-sio__block">
-            <h2>Points communs</h2>
+            <h2>Présentation du projet</h2>
+            <p>
+                <strong>Nom du projet :</strong> <!-- À compléter -->
+            </p>
+            <p>
+                <strong>Contexte :</strong> <!-- À compléter -->
+            </p>
+            <p>
+                <strong>Objectifs :</strong> <!-- À compléter -->
+            </p>
+        </div>
+
+        <div class="bts-sio__block">
+            <h2>Description</h2>
+            <p>
+                <!-- À compléter par l'utilisateur -->
+                Description détaillée du projet personnel.
+            </p>
+        </div>
+
+        <div class="bts-sio__block">
+            <h2>Technologies utilisées</h2>
             <ul>
                 <li><!-- À compléter --></li>
                 <li><!-- À compléter --></li>
@@ -252,51 +274,115 @@ include '../src/views/includes/sidebar.php';
         </div>
 
         <div class="bts-sio__block">
-            <h2>Différences et complémentarité</h2>
+            <h2>Fonctionnalités principales</h2>
+            <ul>
+                <li><!-- À compléter --></li>
+                <li><!-- À compléter --></li>
+                <li><!-- À compléter --></li>
+            </ul>
+        </div>
+
+        <div class="bts-sio__block">
+            <h2>Ressources</h2>
             <p>
-                <!-- À compléter par l'utilisateur -->
-                Analyse des différences entre les deux projets et de leur complémentarité dans la démonstration des compétences.
+                <a href="#" class="download-link">
+                    <i class="ri-github-line"></i> Code source sur GitHub
+                </a>
+            </p>
+            <p>
+                <a href="#" class="download-link">
+                    <i class="ri-file-text-line"></i> Documentation
+                </a>
             </p>
         </div>
+    </section>
 
-        <div class="bts-sio__block">
-            <h2>Compétences mobilisées</h2>
-            <div class="tableau-container">
-                <table class="e5-tableau">
-                    <thead>
-                        <tr>
-                            <th>Compétences</th>
-                            <th>Réalisation 1</th>
-                            <th>Réalisation 2</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Développement web</td>
-                            <td>✓</td>
-                            <td>✓</td>
-                        </tr>
-                        <tr>
-                            <td>Back-end</td>
-                            <td>✓</td>
-                            <td>✓</td>
-                        </tr>
-                        <tr>
-                            <td>Base de données</td>
-                            <td>✓</td>
-                            <td>✓</td>
-                        </tr>
-                        <!-- À compléter par l'utilisateur -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div class="bts-sio__block">
-            <h2>Bilan et apprentissages</h2>
+    <!-- Section 5: Documentations -->
+    <section class="bts-sio" id="documentations">
+        <header class="bts-sio__header">
+            <h1>Documentations</h1>
             <p>
-                <!-- À compléter par l'utilisateur -->
-                Synthèse des apprentissages tirés de ces deux réalisations et de leur apport dans votre parcours.
+                Documentation technique et ressources liées aux réalisations.
+            </p>
+        </header>
+
+        <div class="bts-sio__block">
+            <div class="pdf-viewer-grid">
+                <div class="pdf-viewer-item">
+                    <iframe 
+                        src="<?php echo $basePath; ?>PDFs/open_canary.pdf" 
+                        class="pdf-iframe"
+                        title="Document PDF 1">
+                        <p>Votre navigateur ne supporte pas les iframes. <a href="">Télécharger le PDF</a></p>
+                    </iframe>
+                </div>
+                <div class="pdf-viewer-item">
+                    <iframe 
+                        src="<?php echo $basePath; ?>PDFs/failles.pdf" 
+                        class="pdf-iframe"
+                        title="Document PDF 2">
+                        <p>Votre navigateur ne supporte pas les iframes. <a href="">Télécharger le PDF</a></p>
+                    </iframe>
+                </div>
+                <div class="pdf-viewer-item">
+                    <iframe 
+                        src="" 
+                        class="pdf-iframe"
+                        title="Document PDF 3">
+                        <p>Votre navigateur ne supporte pas les iframes. <a href="">Télécharger le PDF</a></p>
+                    </iframe>
+                </div>
+                <div class="pdf-viewer-item">
+                    <iframe 
+                        src="" 
+                        class="pdf-iframe"
+                        title="Document PDF 4">
+                        <p>Votre navigateur ne supporte pas les iframes. <a href="">Télécharger le PDF</a></p>
+                    </iframe>
+                </div>
+                <div class="pdf-viewer-item">
+                    <iframe 
+                        src="" 
+                        class="pdf-iframe"
+                        title="Document PDF 5">
+                        <p>Votre navigateur ne supporte pas les iframes. <a href="">Télécharger le PDF</a></p>
+                    </iframe>
+                </div>
+                <div class="pdf-viewer-item">
+                    <iframe 
+                        src="" 
+                        class="pdf-iframe"
+                        title="Document PDF 6">
+                        <p>Votre navigateur ne supporte pas les iframes. <a href="">Télécharger le PDF</a></p>
+                    </iframe>
+                </div>
+                <div class="pdf-viewer-item">
+                    <iframe 
+                        src="" 
+                        class="pdf-iframe"
+                        title="Document PDF 7">
+                        <p>Votre navigateur ne supporte pas les iframes. <a href="">Télécharger le PDF</a></p>
+                    </iframe>
+                </div>
+                <div class="pdf-viewer-item">
+                    <iframe 
+                        src="" 
+                        class="pdf-iframe"
+                        title="Document PDF 8">
+                        <p>Votre navigateur ne supporte pas les iframes. <a href="">Télécharger le PDF</a></p>
+                    </iframe>
+                </div>
+                <div class="pdf-viewer-item">
+                    <iframe 
+                        src="" 
+                        class="pdf-iframe"
+                        title="Document PDF 9">
+                        <p>Votre navigateur ne supporte pas les iframes. <a href="">Télécharger le PDF</a></p>
+                    </iframe>
+                </div>
+            </div>
+            <p style="margin-top: 1rem; color: #b0b0b0; font-size: 0.9rem;">
+                <i class="ri-information-line"></i> Ajoutez les chemins vers vos fichiers PDF dans l'attribut <code>src</code> de chaque iframe.
             </p>
         </div>
     </section>

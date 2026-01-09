@@ -263,6 +263,69 @@
     border-bottom: none;
 }
 
+/* ===== STYLES POUR LA LISEUSE PDF E6 ===== */
+
+/* Grille de liseuses PDF - 3x3 par défaut */
+.pdf-viewer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.pdf-viewer-item {
+    background-color: rgba(26, 26, 26, 0.7);
+    border: 1px solid #404040;
+    border-radius: 15px;
+    overflow: hidden;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pdf-iframe {
+    width: 100%;
+    height: 700px;
+    border: 0;
+    background-color: #1a1a1a;
+}
+
+/* Responsive pour la grille PDF */
+@media (max-width: 1200px) {
+    .pdf-viewer-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .pdf-viewer-item {
+        min-height: 600px;
+    }
+    
+    .pdf-iframe {
+        height: 600px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .pdf-viewer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .pdf-viewer-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pdf-viewer-item {
+        min-height: 500px;
+    }
+    
+    .pdf-iframe {
+        height: 500px;
+    }
+}
+
 /* Lien de téléchargement */
 .download-link {
     display: inline-flex;
