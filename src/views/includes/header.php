@@ -6,20 +6,30 @@ if (!function_exists('getBasePath')) {
 if (!isset($basePath)) {
     $basePath = getBasePath();
 }
+
+// S'assurer que basePath se termine par un slash
+if (!empty($basePath) && substr($basePath, -1) !== '/') {
+    $basePath .= '/';
+}
+
+// Si basePath est vide, utiliser "/"
+if (empty($basePath)) {
+    $basePath = '/';
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo isset($pageTitle) ? $pageTitle . ' - ' : ''; ?>Portfolio</title>
+    <title><?php echo isset($pageTitle) ? htmlspecialchars($pageTitle) . ' - ' : ''; ?>Portfolio</title>
     
     <!-- CSS Principal -->
-    <link rel="stylesheet" href="<?php echo $basePath; ?>public/css/main.css">
+    <link rel="stylesheet" href="<?php echo htmlspecialchars($basePath); ?>public/css/main.css">
     
     <!-- CSS spécifique à la page (si défini) -->
     <?php if (isset($pageCSS) && !empty($pageCSS)): ?>
-    <link rel="stylesheet" href="<?php echo $basePath; ?>public/css/pages/<?php echo $pageCSS; ?>">
+    <link rel="stylesheet" href="<?php echo htmlspecialchars($basePath); ?>public/css/pages/<?php echo htmlspecialchars($pageCSS); ?>">
     <?php endif; ?>
     
     <!-- Fonts & Icons -->

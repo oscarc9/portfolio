@@ -1,8 +1,10 @@
 <?php
+// Définir le chemin racine du projet
+$rootPath = dirname(__DIR__);
 $pageTitle = 'Épreuve E6';
 $pageCSS = 'bts.css'; // CSS spécifique à cette page
-include '../src/views/includes/header.php';
-include '../src/views/includes/sidebar.php';
+include $rootPath . '/src/views/includes/header.php';
+include $rootPath . '/src/views/includes/sidebar.php';
 ?>
 
 <main class="main-content">
@@ -72,79 +74,46 @@ include '../src/views/includes/sidebar.php';
         <div class="bts-sio__block">
             <h2>Présentation du projet</h2>
             <p>
-                <strong>Nom du projet :</strong> <!-- À compléter -->
+                <strong>Nom du projet :</strong> Site web e-commerce
             </p>
             <p>
-                <strong>Contexte :</strong> <!-- À compléter -->
+                <strong>Contexte :</strong> lors de la premiere année de bts, nous devions realiser un site web e-commerce avec html, css, et php.
+                <br>
+                le site devait comporter une page d'accueil, une page de produits, une page de panier, une page de contact et une page de connexion.
+                <br>
+                le site devait etre hebergé sur un serveur local via xampp.
             </p>
             <p>
-                <strong>Objectifs :</strong> <!-- À compléter -->
+                <strong>Objectifs :</strong> maitriser les technologies html, css, et php.
             </p>
         </div>
 
-        <div class="bts-sio__block">
-            <h2>Cahier des charges</h2>
-            <p>
-                <!-- À compléter par l'utilisateur -->
-                Description des besoins et des fonctionnalités attendues.
-            </p>
-        </div>
 
         <div class="bts-sio__block">
             <h2>Technologies utilisées</h2>
             <ul>
-                <li><!-- À compléter --></li>
-                <li><!-- À compléter --></li>
-                <li><!-- À compléter --></li>
+                <li>html</li>
+                <li>css</li>
+                <li>php</li>
             </ul>
         </div>
 
-        <div class="bts-sio__block">
-            <h2>Architecture et structure</h2>
-            <p>
-                <!-- À compléter par l'utilisateur -->
-                Description de l'architecture du projet, de la structure des dossiers et de l'organisation du code.
-            </p>
-        </div>
-
-        <div class="bts-sio__block">
-            <h2>Fonctionnalités principales</h2>
-            <ul>
-                <li><!-- À compléter --></li>
-                <li><!-- À compléter --></li>
-                <li><!-- À compléter --></li>
-            </ul>
-        </div>
-
-        <div class="bts-sio__block">
-            <h2>Points techniques remarquables</h2>
-            <p>
-                <!-- À compléter par l'utilisateur -->
-                Mise en avant des aspects techniques les plus intéressants ou complexes de cette réalisation.
-            </p>
-        </div>
-
-        <div class="bts-sio__block">
-            <h2>Difficultés rencontrées et solutions</h2>
-            <p>
-                <!-- À compléter par l'utilisateur -->
-                Description des problèmes rencontrés et des solutions mises en place.
-            </p>
-        </div>
-
-        <div class="bts-sio__block">
-            <h2>Ressources</h2>
-            <p>
-                <a href="#" class="download-link">
-                    <i class="ri-github-line"></i> Code source sur GitHub
-                </a>
-            </p>
-            <p>
-                <a href="#" class="download-link">
-                    <i class="ri-file-text-line"></i> Documentation technique
-                </a>
-            </p>
-        </div>
+    <div class="image-center">
+        <img src="<?php echo $basePath; ?>gallery/site_ecommerce.jpg" alt="Site web e-commerce">
+    </div>
+    <div class="bts-sio__block">
+        <h2>Ressources</h2>
+        <p>
+            <a href="https://github.com/oscarc9/bts1" class="download-link">
+                <i class="ri-github-line"></i> Code source sur GitHub
+            </a>
+        </p>
+        <p>
+            <a href="https://oscarc9.github.io/monsite_static/" class="download-link">
+                <i class="ri-global-line"></i> Version statique
+            </a>
+        </p>
+    </div>
     </section>
 
     <!-- Section 3: Réalisation 2 -->
@@ -224,11 +193,6 @@ include '../src/views/includes/sidebar.php';
             <p>
                 <a href="#" class="download-link">
                     <i class="ri-github-line"></i> Code source sur GitHub
-                </a>
-            </p>
-            <p>
-                <a href="#" class="download-link">
-                    <i class="ri-file-text-line"></i> Documentation technique
                 </a>
             </p>
         </div>
@@ -381,12 +345,15 @@ include '../src/views/includes/sidebar.php';
                     </iframe>
                 </div>
             </div>
-            <p style="margin-top: 1rem; color: #b0b0b0; font-size: 0.9rem;">
+            <p class="map-address">
                 <i class="ri-information-line"></i> Ajoutez les chemins vers vos fichiers PDF dans l'attribut <code>src</code> de chaque iframe.
             </p>
         </div>
     </section>
 </main>
 
-<?php include '../src/views/includes/footer.php'; ?>
+<?php 
+$rootPath = dirname(__DIR__);
+include $rootPath . '/src/views/includes/footer.php'; 
+?>
 

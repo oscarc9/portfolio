@@ -6,27 +6,30 @@
 
 // Détermine le chemin de base automatiquement
 function getBasePath() {
-    // Chemin absolu de la racine du projet
-    $projectRoot = realpath(__DIR__ . '/..');
+    // Sur Cloudways, les fichiers sont dans public_html/ à la racine
+    // Le chemin de base est simplement "/"
     
-    // Chemin absolu du script actuel
-    $scriptPath = realpath($_SERVER['SCRIPT_FILENAME']);
+    // Vérifier si on est dans un sous-dossier (développement local)
+    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+    $requestUri = $_SERVER['REQUEST_URI'] ?? '';
     
-    // Chemin relatif depuis le script jusqu'à la racine
-    $relativePath = str_replace($projectRoot, '', dirname($scriptPath));
+    // Extraire le chemin de base depuis REQUEST_URI
+    $uri = parse_url($requestUri, PHP_URL_PATH);
     
-    // Si on est à la racine
-    if (empty($relativePath) || $relativePath === '/' || $relativePath === '\\') {
-        return '';
+    // Si l'URI contient /portfolio/, c'est un environnement local
+    if (strpos($uri, '/portfolio/') === 0) {
+        return '/portfolio/';
     }
     
-    // Compte le nombre de niveaux à remonter
-    $levels = substr_count($relativePath, DIRECTORY_SEPARATOR);
-    if ($levels > 0) {
-        return str_repeat('../', $levels);
+    // Vérifier aussi SCRIPT_NAME pour détecter le sous-dossier
+    if (strpos($scriptName, '/portfolio/') !== false) {
+        return '/portfolio/';
     }
     
-    return '';
+    // Sinon, on est à la racine (production Cloudways)
+    // Le script index.php est à la racine, donc basePath = "/"
+    // S'assurer qu'on retourne toujours un slash final
+    return '/';
 }
 
 // Définit la variable globale $basePath si elle n'existe pas

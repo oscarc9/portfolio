@@ -1,8 +1,10 @@
 <?php
+// Définir le chemin racine du projet
+$rootPath = dirname(__DIR__);
 $pageTitle = 'Épreuve E5';
 $pageCSS = 'bts.css'; // CSS spécifique à cette page
-include '../src/views/includes/header.php';
-include '../src/views/includes/sidebar.php';
+include $rootPath . '/src/views/includes/header.php';
+include $rootPath . '/src/views/includes/sidebar.php';
 ?>
 
 <main class="main-content">
@@ -235,5 +237,8 @@ include '../src/views/includes/sidebar.php';
     </section>
 </main>
 
-<?php include '../src/views/includes/footer.php'; ?>
+<?php 
+$rootPath = dirname(__DIR__);
+include $rootPath . '/src/views/includes/footer.php'; 
+?>
 

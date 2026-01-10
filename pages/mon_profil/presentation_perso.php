@@ -1,8 +1,10 @@
 <?php
+// Définir le chemin racine du projet
+$rootPath = dirname(__DIR__, 2);
 $pageTitle = 'Présentation personnelle';
 $pageCSS = 'bts.css'; // CSS spécifique à cette page
-include '../../src/views/includes/header.php';
-include '../../src/views/includes/sidebar.php';
+include $rootPath . '/src/views/includes/header.php';
+include $rootPath . '/src/views/includes/sidebar.php';
 ?>
 
 <main class="main-content">
@@ -63,18 +65,21 @@ include '../../src/views/includes/sidebar.php';
         src="https://www.google.com/maps?q=4+rue+d%27Upsal,+67000+Strasbourg&output=embed"
         width="100%" 
         height="450" 
-        style="border:0; border-radius: 8px;" 
+               class="map-iframe"
         allowfullscreen="" 
         loading="lazy" 
         referrerpolicy="no-referrer-when-downgrade"
         title="Carte de localisation - 4 rue d'Upsal, Strasbourg">
       </iframe>
     </div>
-    <p style="margin-top: 1rem; color: #b0b0b0;">
+    <p class="map-address">
       <i class="ri-map-pin-line"></i> 4 rue d'Upsal, 67000 Strasbourg, France
     </p>
   </div>
 </section>
 </main>
 
-<?php include '../../src/views/includes/footer.php'; ?>
+<?php 
+$rootPath = dirname(__DIR__, 2);
+include $rootPath . '/src/views/includes/footer.php'; 
+?>

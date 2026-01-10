@@ -1,8 +1,10 @@
 <?php
+// Définir le chemin racine du projet
+$rootPath = dirname(__DIR__);
 $pageTitle = 'Accueil';
 $pageCSS = 'accueil.css'; // CSS spécifique à cette page
-include '../src/views/includes/header.php';
-include '../src/views/includes/sidebar.php';
+include $rootPath . '/src/views/includes/header.php';
+include $rootPath . '/src/views/includes/sidebar.php';
 ?>
 
 <!-- Contenu principal -->
@@ -30,4 +32,7 @@ include '../src/views/includes/sidebar.php';
     </div>
 </main>
 
-<?php include '../src/views/includes/footer.php'; ?>
+<?php 
+$rootPath = dirname(__DIR__);
+include $rootPath . '/src/views/includes/footer.php'; 
+?>

@@ -1,8 +1,10 @@
 <?php
+// Définir le chemin racine du projet
+$rootPath = dirname(__DIR__);
 $pageTitle = 'Ma passion';
 $pageCSS = 'bts.css'; // CSS spécifique à cette page
-include '../src/views/includes/header.php';
-include '../src/views/includes/sidebar.php';
+include $rootPath . '/src/views/includes/header.php';
+include $rootPath . '/src/views/includes/sidebar.php';
 ?>
 
 <main class="main-content">
@@ -31,7 +33,26 @@ include '../src/views/includes/sidebar.php';
         <div class="bts-sio__block">
             <h2>Voici ce sur quoi je me suis penché cette année et ce que j'ai appris</h2>
             
-            <!-- Galerie de photos défilante CSS pure -->
+            <!-- Galerie de photos défilante dynamique depuis BDD -->
+            <?php
+            try {
+                require_once __DIR__ . '/../config/db.php';
+                require_once __DIR__ . '/../src/utils/GalleryHelper.php';
+                $db = getDatabaseConnection();
+
+                // Génération dynamique depuis la BDD
+                $galleryHtml = GalleryHelper::generateCarousel($db, $basePath);
+
+                // Si la BDD ne contient pas d'images, on bascule sur le fallback statique
+                if (empty($galleryHtml) || strpos($galleryHtml, 'gallery-empty') !== false) {
+                    throw new Exception('Galerie vide, fallback statique');
+                }
+
+                echo $galleryHtml;
+            } catch (Exception $e) {
+                // Fallback vers carousel statique si erreur BDD ou galerie vide
+                error_log("Erreur galerie: " . $e->getMessage());
+            ?>
             <div class="carousel-wrapper">
                 <!-- Radio buttons cachés pour la navigation -->
                 <input type="radio" name="carousel" id="carousel-1" class="carousel-radio" checked>
@@ -129,6 +150,9 @@ include '../src/views/includes/sidebar.php';
                     <i class="ri-arrow-right-s-line"></i>
                 </label>
             </div>
+            <?php
+            }
+            ?>
         </div>
 
         <div class="bts-sio__block">
@@ -182,4 +206,7 @@ include '../src/views/includes/sidebar.php';
     </section>
 </main>
 
-<?php include '../src/views/includes/footer.php'; ?>
+<?php 
+$rootPath = dirname(__DIR__);
+include $rootPath . '/src/views/includes/footer.php'; 
+?>

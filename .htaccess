@@ -1,0 +1,34 @@
+# Portfolio CMS - Configuration Apache
+# Réécriture d'URLs pour URLs propres
+
+# Activer le moteur de réécriture
+RewriteEngine On
+
+# Base directory - Pour Cloudways, la racine est public_html/
+RewriteBase /
+
+# Ne pas réécrire les fichiers et dossiers existants
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Ne pas réécrire les fichiers dans public/ (CSS, JS, images)
+RewriteCond %{REQUEST_URI} !^/public/
+
+# Ne pas réécrire les fichiers dans gallery/ et PDFs/
+RewriteCond %{REQUEST_URI} !^/gallery/
+RewriteCond %{REQUEST_URI} !^/PDFs/
+
+# Rediriger toutes les autres requêtes vers index.php
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# Protection des fichiers sensibles
+<FilesMatch "\.(sql|md|log)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Protection du dossier config
+<IfModule mod_rewrite.c>
+    RewriteRule ^config/ - [F,L]
+</IfModule>
+
