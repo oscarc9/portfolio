@@ -36,6 +36,14 @@ include $rootPath . '/src/views/includes/sidebar.php';
             <!-- Galerie de photos défilante dynamique depuis BDD -->
             <?php
             try {
+                // S'assurer que $basePath est défini
+                if (!isset($basePath)) {
+                    if (!function_exists('getBasePath')) {
+                        require_once __DIR__ . '/../config/paths.php';
+                    }
+                    $basePath = getBasePath();
+                }
+                
                 require_once __DIR__ . '/../config/db.php';
                 require_once __DIR__ . '/../src/utils/GalleryHelper.php';
                 $db = getDatabaseConnection();

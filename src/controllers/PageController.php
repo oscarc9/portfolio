@@ -41,12 +41,21 @@ class PageController {
         }
         
         // Afficher la page
-        $pageTitle = $pageData['titre'];
+        $pageTitle = $pageData['titre'] ?? 'Page';
         $pageCSS = 'bts.css';
-        require_once __DIR__ . '/../config/paths.php';
+        
+        // S'assurer que les dépendances sont chargées
+        if (!function_exists('getBasePath')) {
+            require_once __DIR__ . '/../../config/paths.php';
+        }
         if (!isset($basePath)) {
             $basePath = getBasePath();
         }
+        
+        // Passer les variables nécessaires à la vue
+        $db = $this->db;
+        // $pageData est déjà défini et sera accessible dans la vue
+        
         include __DIR__ . '/../views/includes/header.php';
         include __DIR__ . '/../views/includes/sidebar.php';
         include __DIR__ . '/../views/front/page.php';
@@ -84,7 +93,6 @@ class PageController {
             $titre = trim($_POST['titre'] ?? '');
             $contenu = $_POST['contenu'] ?? '';
             $parentId = !empty($_POST['parent_id']) ? (int)$_POST['parent_id'] : null;
-            $ordre = !empty($_POST['ordre']) ? (int)$_POST['ordre'] : 0;
             
             if (empty($titre)) {
                 $error = 'Le titre est obligatoire';
@@ -94,8 +102,7 @@ class PageController {
                     'titre' => Security::sanitize($titre),
                     'slug' => $slug,
                     'contenu' => $contenu,
-                    'parent_id' => $parentId,
-                    'ordre' => $ordre
+                    'parent_id' => $parentId
                 ];
                 
                 if ($this->pageModel->create($data)) {
@@ -140,7 +147,6 @@ class PageController {
             $titre = trim($_POST['titre'] ?? '');
             $contenu = $_POST['contenu'] ?? '';
             $parentId = !empty($_POST['parent_id']) ? (int)$_POST['parent_id'] : null;
-            $ordre = !empty($_POST['ordre']) ? (int)$_POST['ordre'] : 0;
             
             if (empty($titre)) {
                 $error = 'Le titre est obligatoire';
@@ -148,8 +154,7 @@ class PageController {
                 $data = [
                     'titre' => Security::sanitize($titre),
                     'contenu' => $contenu,
-                    'parent_id' => $parentId,
-                    'ordre' => $ordre
+                    'parent_id' => $parentId
                 ];
                 
                 if ($this->pageModel->update($id, $data)) {

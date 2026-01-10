@@ -47,7 +47,7 @@ class Page {
      */
     public function findAll() {
         try {
-            $stmt = $this->db->query("SELECT * FROM pages ORDER BY ordre ASC, titre ASC");
+            $stmt = $this->db->query("SELECT * FROM pages ORDER BY titre ASC");
             return $stmt->fetchAll();
         } catch (PDOException $e) {
             error_log("Erreur Page::findAll: " . $e->getMessage());
@@ -87,15 +87,14 @@ class Page {
     public function create($data) {
         try {
             $stmt = $this->db->prepare("
-                INSERT INTO pages (titre, slug, contenu, parent_id, ordre) 
-                VALUES (?, ?, ?, ?, ?)
+                INSERT INTO pages (titre, slug, contenu, parent_id) 
+                VALUES (?, ?, ?, ?)
             ");
             $stmt->execute([
                 $data['titre'],
                 $data['slug'],
                 $data['contenu'] ?? '',
-                $data['parent_id'] ?? null,
-                $data['ordre'] ?? 0
+                $data['parent_id'] ?? null
             ]);
             return $this->db->lastInsertId();
         } catch (PDOException $e) {
@@ -116,7 +115,7 @@ class Page {
             $values = [];
             
             foreach ($data as $key => $value) {
-                if (in_array($key, ['titre', 'slug', 'contenu', 'parent_id', 'ordre'])) {
+                if (in_array($key, ['titre', 'slug', 'contenu', 'parent_id'])) {
                     $fields[] = "$key = ?";
                     $values[] = $value;
                 }

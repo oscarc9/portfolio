@@ -96,34 +96,35 @@ function renderMenuItems($items, $basePath, $level = 0) {
     </div>
     
     <ul class="navbar">
+        <!-- Menu par défaut (toujours affiché) -->
+        <li><a href="<?php echo htmlspecialchars($basePath); ?>accueil"><i class="ri-home-line"></i> Accueil</a></li>
+        <li><a href="<?php echo htmlspecialchars($basePath); ?>bts"><i class="ri-book-line"></i> Présentation BTS SIO</a></li>
+        <li><a href="<?php echo htmlspecialchars($basePath); ?>mon-profil"><i class="ri-user-line"></i> Mon profil</a></li>
+        
+        <li class="has-submenu">
+            <input type="checkbox" id="submenu-competences" class="submenu-toggle">
+            <label for="submenu-competences"><i class="ri-tools-line"></i> Mes compétences <i class="ri-arrow-down-s-line arrow"></i></label>
+            <ul class="submenu">
+                <li><a href="<?php echo htmlspecialchars($basePath); ?>competences-techniques">Compétences techniques</a></li>
+                <li><a href="<?php echo htmlspecialchars($basePath); ?>soft-skills">Soft skills</a></li>
+            </ul>
+        </li>
+        
+        <li class="has-submenu">
+            <input type="checkbox" id="submenu-projets" class="submenu-toggle">
+            <label for="submenu-projets"><i class="ri-folder-line"></i> Mes projets <i class="ri-arrow-down-s-line arrow"></i></label>
+            <ul class="submenu">
+                <li><a href="<?php echo htmlspecialchars($basePath); ?>epreuve-e5"><i class="ri-file-list-3-line"></i> Épreuve E5</a></li>
+                <li><a href="<?php echo htmlspecialchars($basePath); ?>epreuve-e6"><i class="ri-code-box-line"></i> Épreuve E6</a></li>
+            </ul>
+        </li>
+        
+        <li><a href="<?php echo htmlspecialchars($basePath); ?>passion"><i class="ri-image-line"></i> Ma passion</a></li>
+        <li><a href="<?php echo htmlspecialchars($basePath); ?>contact"><i class="ri-mail-line"></i> Contact</a></li>
+        
+        <!-- Menu dynamique depuis la base de données (ajouté après le menu par défaut) -->
         <?php if (!empty($menuItems)): ?>
             <?php renderMenuItems($menuItems, $basePath); ?>
-        <?php else: ?>
-            <!-- Menu par défaut si BDD non disponible -->
-            <li><a href="<?php echo htmlspecialchars($basePath); ?>accueil"><i class="ri-home-line"></i> Accueil</a></li>
-            <li><a href="<?php echo htmlspecialchars($basePath); ?>bts"><i class="ri-book-line"></i> Présentation BTS SIO</a></li>
-            <li><a href="<?php echo htmlspecialchars($basePath); ?>mon-profil"><i class="ri-user-line"></i> Mon profil</a></li>
-            
-            <li class="has-submenu">
-                <input type="checkbox" id="submenu-competences" class="submenu-toggle">
-                <label for="submenu-competences"><i class="ri-tools-line"></i> Mes compétences <i class="ri-arrow-down-s-line arrow"></i></label>
-                <ul class="submenu">
-                    <li><a href="<?php echo htmlspecialchars($basePath); ?>competences-techniques">Compétences techniques</a></li>
-                    <li><a href="<?php echo htmlspecialchars($basePath); ?>soft-skills">Soft skills</a></li>
-                </ul>
-            </li>
-            
-            <li class="has-submenu">
-                <input type="checkbox" id="submenu-projets" class="submenu-toggle">
-                <label for="submenu-projets"><i class="ri-folder-line"></i> Mes projets <i class="ri-arrow-down-s-line arrow"></i></label>
-                <ul class="submenu">
-                    <li><a href="<?php echo htmlspecialchars($basePath); ?>epreuve-e5"><i class="ri-file-list-3-line"></i> Épreuve E5</a></li>
-                    <li><a href="<?php echo htmlspecialchars($basePath); ?>epreuve-e6"><i class="ri-code-box-line"></i> Épreuve E6</a></li>
-                </ul>
-            </li>
-            
-            <li><a href="<?php echo htmlspecialchars($basePath); ?>passion"><i class="ri-image-line"></i> Ma passion</a></li>
-            <li><a href="<?php echo htmlspecialchars($basePath); ?>contact"><i class="ri-mail-line"></i> Contact</a></li>
         <?php endif; ?>
     </ul>
 

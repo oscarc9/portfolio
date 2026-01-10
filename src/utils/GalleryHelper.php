@@ -5,26 +5,42 @@
 class GalleryHelper {
     
     /**
-     * Génère le HTML du carousel depuis les médias de la BDD
-     * @param PDO $db Connexion à la base de données
+     * Génère le HTML du carousel depuis les images du dossier gallery/
+     * @param PDO|null $db Connexion à la base de données (non utilisé, conservé pour compatibilité)
      * @param string $basePath Chemin de base
      * @return string HTML du carousel
      */
-    public static function generateCarousel($db, $basePath) {
-        require_once __DIR__ . '/../models/Media.php';
-        
+    public static function generateCarousel($db = null, $basePath = '/') {
         try {
-            $mediaModel = new Media($db);
-            $images = $mediaModel->findAll('image');
+            // Définir le chemin du dossier gallery
+            $galleryPath = __DIR__ . '/../../gallery/';
             
-            if (empty($images)) {
+            // Liste des images à afficher dans le carousel (dans l'ordre souhaité)
+            $galleryImages = [
+                ['file' => 'buffer.jpg', 'title' => 'Buffer Overflow', 'description' => 'Analyse et exploitation des débordements de tampon'],
+                ['file' => 'hydra.jpg', 'title' => 'Hydra', 'description' => 'Test de force brute et attaques par dictionnaire'],
+                ['file' => 'script.jpg', 'title' => 'Scripts de sécurité', 'description' => 'Automatisation des tests de sécurité'],
+                ['file' => 'hack.jpg', 'title' => 'Hack phishing', 'description' => 'Attaque par phishing et récupération de mots de passe'],
+                ['file' => 'etudiant.jpg', 'title' => 'Salon de l\'étudiant (Paris)', 'description' => 'Salon de l\'étudiant à Paris'],
+                ['file' => 'esme.jpg', 'title' => 'Présentation école ESME', 'description' => 'Présentation école ESME pour bachelor (Paris)']
+            ];
+            
+            // Filtrer les images qui existent réellement
+            $existingImages = [];
+            foreach ($galleryImages as $image) {
+                if (file_exists($galleryPath . $image['file'])) {
+                    $existingImages[] = $image;
+                }
+            }
+            
+            if (empty($existingImages)) {
                 return '<p class="gallery-empty">Aucune image dans la galerie.</p>';
             }
             
             $html = '<div class="carousel-wrapper">';
             
             // Générer les radio buttons
-            $count = count($images);
+            $count = count($existingImages);
             for ($i = 1; $i <= $count; $i++) {
                 $checked = $i === 1 ? ' checked' : '';
                 $html .= '<input type="radio" name="carousel" id="carousel-' . $i . '" class="carousel-radio"' . $checked . '>';
@@ -43,10 +59,14 @@ class GalleryHelper {
             $html .= '<div class="carousel-track" data-count="' . $count . '">';
             
             // Générer les slides
-            foreach ($images as $index => $image) {
+            foreach ($existingImages as $index => $image) {
                 $html .= '<div class="carousel-slide">';
-                $html .= '<img src="' . $basePath . 'public/uploads/' . htmlspecialchars($image['fichier']) . '" ';
-                $html .= 'alt="' . htmlspecialchars($image['fichier']) . '">';
+                $html .= '<img src="' . htmlspecialchars($basePath) . 'gallery/' . htmlspecialchars($image['file']) . '" ';
+                $html .= 'alt="' . htmlspecialchars($image['title']) . '">';
+                $html .= '<div class="slide-caption">';
+                $html .= '<h3>' . htmlspecialchars($image['title']) . '</h3>';
+                $html .= '<p>' . htmlspecialchars($image['description']) . '</p>';
+                $html .= '</div>';
                 $html .= '</div>';
             }
             
@@ -76,6 +96,8 @@ class GalleryHelper {
                 $html .= 'display: flex;';
                 $html .= '}';
             }
+            $html .= '.carousel-track { width: ' . ($count * 100) . '%; }';
+            $html .= '.carousel-slide { width: ' . (100 / $count) . '%; }';
             $html .= '</style>';
             
             return $html;

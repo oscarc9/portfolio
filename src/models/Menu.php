@@ -31,7 +31,7 @@ class Menu {
      */
     public function findAll() {
         try {
-            $stmt = $this->db->query("SELECT * FROM menu ORDER BY ordre ASC, nom ASC");
+            $stmt = $this->db->query("SELECT * FROM menu ORDER BY nom ASC");
             return $stmt->fetchAll();
         } catch (PDOException $e) {
             error_log("Erreur Menu::findAll: " . $e->getMessage());
@@ -76,14 +76,13 @@ class Menu {
     public function create($data) {
         try {
             $stmt = $this->db->prepare("
-                INSERT INTO menu (nom, lien, parent_id, ordre, page_id) 
-                VALUES (?, ?, ?, ?, ?)
+                INSERT INTO menu (nom, lien, parent_id, page_id) 
+                VALUES (?, ?, ?, ?)
             ");
             $stmt->execute([
                 $data['nom'],
                 $data['lien'] ?? null,
                 $data['parent_id'] ?? null,
-                $data['ordre'] ?? 0,
                 $data['page_id'] ?? null
             ]);
             return $this->db->lastInsertId();
@@ -105,7 +104,7 @@ class Menu {
             $values = [];
             
             foreach ($data as $key => $value) {
-                if (in_array($key, ['nom', 'lien', 'parent_id', 'ordre', 'page_id'])) {
+                if (in_array($key, ['nom', 'lien', 'parent_id', 'page_id'])) {
                     $fields[] = "$key = ?";
                     $values[] = $value;
                 }

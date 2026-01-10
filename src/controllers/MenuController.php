@@ -61,7 +61,6 @@ class MenuController {
             $lien = trim($_POST['lien'] ?? '');
             $parentId = !empty($_POST['parent_id']) ? (int)$_POST['parent_id'] : null;
             $pageId = !empty($_POST['page_id']) ? (int)$_POST['page_id'] : null;
-            $ordre = !empty($_POST['ordre']) ? (int)$_POST['ordre'] : 0;
             
             if (empty($nom)) {
                 $error = 'Le nom est obligatoire';
@@ -70,8 +69,7 @@ class MenuController {
                     'nom' => Security::sanitize($nom),
                     'lien' => !empty($lien) ? Security::sanitize($lien) : null,
                     'parent_id' => $parentId,
-                    'page_id' => $pageId,
-                    'ordre' => $ordre
+                    'page_id' => $pageId
                 ];
                 
                 if ($this->menuModel->create($data)) {
@@ -121,7 +119,6 @@ class MenuController {
             $lien = trim($_POST['lien'] ?? '');
             $parentId = !empty($_POST['parent_id']) ? (int)$_POST['parent_id'] : null;
             $pageId = !empty($_POST['page_id']) ? (int)$_POST['page_id'] : null;
-            $ordre = !empty($_POST['ordre']) ? (int)$_POST['ordre'] : 0;
             
             if (empty($nom)) {
                 $error = 'Le nom est obligatoire';
@@ -130,8 +127,7 @@ class MenuController {
                     'nom' => Security::sanitize($nom),
                     'lien' => !empty($lien) ? Security::sanitize($lien) : null,
                     'parent_id' => $parentId,
-                    'page_id' => $pageId,
-                    'ordre' => $ordre
+                    'page_id' => $pageId
                 ];
                 
                 if ($this->menuModel->update($id, $data)) {

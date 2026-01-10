@@ -30,7 +30,6 @@ function displayMenuItems($items, $level = 0, $basePath) {
         echo '<tr>';
         echo '<td>' . $indent . Security::sanitize($item['nom'] ?? '') . '</td>';
         echo '<td>' . (($item['lien'] ?? '') ? Security::sanitize($item['lien']) : '-') . '</td>';
-        echo '<td>' . (int)($item['ordre'] ?? 0) . '</td>';
         echo '<td>';
         echo '<div class="actions">';
         echo '<a href="' . htmlspecialchars($basePath) . 'admin/menu/edit?id=' . (int)($item['id'] ?? 0) . '" class="btn btn-small">';
@@ -90,14 +89,13 @@ function displayMenuItems($items, $level = 0, $basePath) {
                 <tr>
                     <th>Nom</th>
                     <th>Lien</th>
-                    <th>Ordre</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (empty($menuItems)): ?>
                     <tr>
-                        <td colspan="4">
+                        <td colspan="3">
                             Aucun élément de menu. <a href="<?php echo htmlspecialchars($basePath); ?>admin/menu/create">Ajouter le premier élément</a>
                         </td>
                     </tr>

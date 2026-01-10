@@ -61,14 +61,13 @@ $basePath = getBasePath();
                     <th>ID</th>
                     <th>Titre</th>
                     <th>Slug</th>
-                    <th>Ordre</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <?php if (empty($pages)): ?>
                     <tr>
-                        <td colspan="5">
+                        <td colspan="4">
                             Aucune page trouvée. <a href="<?php echo htmlspecialchars($basePath); ?>admin/pages/create">Créer la première page</a>
                         </td>
                     </tr>
@@ -78,7 +77,6 @@ $basePath = getBasePath();
                             <td><?php echo (int)$page['id']; ?></td>
                             <td><?php echo Security::sanitize($page['titre'] ?? ''); ?></td>
                             <td><code><?php echo Security::sanitize($page['slug'] ?? ''); ?></code></td>
-                            <td><?php echo (int)($page['ordre'] ?? 0); ?></td>
                             <td>
                                 <div class="actions">
                                     <a href="<?php echo htmlspecialchars($basePath); ?>admin/pages/edit?id=<?php echo (int)$page['id']; ?>" class="btn btn-small">

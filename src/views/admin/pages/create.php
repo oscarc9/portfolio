@@ -69,11 +69,6 @@ $allPages = $allPages ?? [];
             </div>
 
             <div class="form-group">
-                <label for="ordre">Ordre d'affichage</label>
-                <input type="number" id="ordre" name="ordre" value="<?php echo isset($_POST['ordre']) ? (int)$_POST['ordre'] : 0; ?>" min="0">
-            </div>
-
-            <div class="form-group">
                 <label for="contenu">Contenu</label>
                 <textarea id="contenu" name="contenu" rows="15" class="large"><?php echo isset($_POST['contenu']) ? htmlspecialchars($_POST['contenu']) : ''; ?></textarea>
             </div>
