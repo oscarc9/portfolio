@@ -3,6 +3,12 @@
  * Contrôleur Contact - Gestion du formulaire de contact
  */
 require_once __DIR__ . '/../utils/Security.php';
+require_once __DIR__ . '/../utils/EmailHelper.php';
+
+// S'assurer que getBasePath() est disponible
+if (!function_exists('getBasePath')) {
+    require_once __DIR__ . '/../../config/paths.php';
+}
 
 class ContactController {
     private $db;
@@ -30,8 +36,11 @@ class ContactController {
             } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $error = 'Adresse email invalide';
             } else {
-                // Essayer d'envoyer par email
-                $emailSent = $this->sendEmail($nom, $email, $sujet, $message);
+                // Envoyer le message par email (SMTP)
+                $emailSent = EmailHelper::sendContactMessage($nom, $email, $sujet, $message);
+                
+                // Envoyer l'accusé de réception à l'utilisateur
+                EmailHelper::sendConfirmation($nom, $email, $sujet);
                 
                 // Stocker en BDD si disponible
                 if ($this->db !== null) {
@@ -39,9 +48,9 @@ class ContactController {
                 }
                 
                 if ($emailSent) {
-                    $success = 'Votre message a été envoyé avec succès !';
+                    $success = 'Votre message a été envoyé avec succès ! Vous allez recevoir un email de confirmation.';
                 } else {
-                    $success = 'Votre message a été envoyé. Merci de votre contact !';
+                    $success = 'Votre message a été enregistré. Merci de votre contact !';
                 }
                 
                 // Réinitialiser le formulaire
@@ -53,27 +62,101 @@ class ContactController {
     }
     
     /**
-     * Envoie un email (si serveur mail configuré)
-     * @param string $nom Nom de l'expéditeur
-     * @param string $email Email de l'expéditeur
-     * @param string $sujet Sujet du message
-     * @param string $message Message
-     * @return bool True si envoyé avec succès
+     * Liste tous les messages de contact (admin)
      */
-    private function sendEmail($nom, $email, $sujet, $message) {
-        $to = 'oscarsineux95@gmail.com'; // Email de réception
-        $subject = 'Contact Portfolio: ' . (!empty($sujet) ? $sujet : 'Sans sujet');
-        $body = "Nouveau message depuis le portfolio\n\n";
-        $body .= "Nom: $nom\n";
-        $body .= "Email: $email\n";
-        $body .= "Sujet: " . (!empty($sujet) ? $sujet : 'Sans sujet') . "\n\n";
-        $body .= "Message:\n$message\n";
+    public function listMessages() {
+        Security::requireAdmin();
         
-        $headers = "From: $email\r\n";
-        $headers .= "Reply-To: $email\r\n";
-        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        $messages = [];
+        if ($this->db !== null) {
+            try {
+                $this->createContactTable();
+                $stmt = $this->db->query("SELECT * FROM contact_messages ORDER BY created_at DESC");
+                $messages = $stmt->fetchAll();
+            } catch (PDOException $e) {
+                error_log("Erreur ContactController::listMessages: " . $e->getMessage());
+                $messages = [];
+            }
+        }
         
-        return @mail($to, $subject, $body, $headers);
+        $pageTitle = 'Messages de contact';
+        $basePath = getBasePath();
+        
+        include __DIR__ . '/../views/admin/contact/list.php';
+    }
+    
+    /**
+     * Affiche le formulaire de réponse et traite les réponses (admin)
+     */
+    public function reply() {
+        Security::requireAdmin();
+        
+        $id = (int)($_GET['id'] ?? 0);
+        $message = null;
+        $error = '';
+        $success = '';
+        
+        if ($id > 0 && $this->db !== null) {
+            try {
+                $stmt = $this->db->prepare("SELECT * FROM contact_messages WHERE id = ?");
+                $stmt->execute([$id]);
+                $message = $stmt->fetch();
+            } catch (PDOException $e) {
+                error_log("Erreur ContactController::reply (récupération): " . $e->getMessage());
+            }
+        }
+        
+        if (!$message) {
+            header('Location: ' . getBasePath() . 'admin/contact');
+            exit;
+        }
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $reponse = trim($_POST['reponse'] ?? '');
+            
+            if (empty($reponse)) {
+                $error = 'Veuillez saisir une réponse';
+            } else {
+                // Envoyer l'email de réponse à l'utilisateur
+                $emailSent = EmailHelper::sendReply(
+                    $message['nom'],
+                    $message['email'],
+                    $message['sujet'],
+                    $reponse
+                );
+                
+                // Sauvegarder la réponse en BDD
+                if ($this->db !== null) {
+                    try {
+                        $this->updateContactTable();
+                        $stmt = $this->db->prepare("
+                            UPDATE contact_messages 
+                            SET reponse = ?, reponse_at = NOW(), reponse_envoyee = ? 
+                            WHERE id = ?
+                        ");
+                        $stmt->execute([
+                            Security::sanitize($reponse),
+                            $emailSent ? 1 : 0,
+                            $id
+                        ]);
+                        
+                        if ($emailSent) {
+                            $success = 'Réponse envoyée avec succès ! L\'utilisateur a été notifié par email.';
+                        } else {
+                            $success = 'Réponse sauvegardée mais l\'email n\'a pas pu être envoyé.';
+                        }
+                    } catch (PDOException $e) {
+                        $error = 'Erreur lors de la sauvegarde de la réponse';
+                        error_log("Erreur ContactController::reply (sauvegarde): " . $e->getMessage());
+                    }
+                }
+            }
+        }
+        
+        $pageTitle = 'Répondre au message';
+        $basePath = getBasePath();
+        
+        include __DIR__ . '/../views/admin/contact/reply.php';
     }
     
     /**
@@ -125,12 +208,41 @@ class ContactController {
                     email VARCHAR(255) NOT NULL,
                     sujet VARCHAR(255) DEFAULT NULL,
                     message TEXT NOT NULL,
+                    reponse TEXT DEFAULT NULL,
+                    reponse_at TIMESTAMP NULL DEFAULT NULL,
+                    reponse_envoyee BOOLEAN DEFAULT FALSE,
                     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                     PRIMARY KEY (id)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
             ");
         } catch (PDOException $e) {
             // Table existe déjà, ignorer l'erreur
+        }
+    }
+    
+    /**
+     * Met à jour la table contact_messages pour ajouter les colonnes de réponse si nécessaire
+     */
+    private function updateContactTable() {
+        if ($this->db === null) {
+            return;
+        }
+        
+        try {
+            // Vérifier si les colonnes existent déjà
+            $stmt = $this->db->query("SHOW COLUMNS FROM contact_messages LIKE 'reponse'");
+            if ($stmt->rowCount() == 0) {
+                // Ajouter les colonnes de réponse
+                $this->db->exec("
+                    ALTER TABLE contact_messages 
+                    ADD COLUMN reponse TEXT DEFAULT NULL,
+                    ADD COLUMN reponse_at TIMESTAMP NULL DEFAULT NULL,
+                    ADD COLUMN reponse_envoyee BOOLEAN DEFAULT FALSE
+                ");
+            }
+        } catch (PDOException $e) {
+            // Colonnes existent déjà ou erreur, ignorer
+            error_log("Erreur updateContactTable: " . $e->getMessage());
         }
     }
 }

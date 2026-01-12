@@ -52,14 +52,6 @@ $basePath = getBasePath();
             </div>
 
             <div class="form-group">
-                <label for="lien">Lien (optionnel)</label>
-                <input type="text" id="lien" name="lien" 
-                       value="<?php echo Security::sanitize($menuItem['lien'] ?? ''); ?>"
-                       placeholder="/exemple ou https://exemple.com">
-                <div class="help-text">Laissez vide si vous associez une page</div>
-            </div>
-
-            <div class="form-group">
                 <label for="page_id">Page associée (optionnel)</label>
                 <select id="page_id" name="page_id">
                     <option value="">Aucune</option>
@@ -69,23 +61,6 @@ $basePath = getBasePath();
                                     <?php echo (($menuItem['page_id'] ?? null) == ($p['id'] ?? 0)) ? 'selected' : ''; ?>>
                                 <?php echo Security::sanitize($p['titre'] ?? ''); ?>
                             </option>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="parent_id">Élément parent (optionnel)</label>
-                <select id="parent_id" name="parent_id">
-                    <option value="">Aucun (élément racine)</option>
-                    <?php if (!empty($allMenuItems)): ?>
-                        <?php foreach ($allMenuItems as $item): ?>
-                            <?php if (($item['id'] ?? 0) != ($menuItem['id'] ?? 0)): ?>
-                                <option value="<?php echo (int)($item['id'] ?? 0); ?>" 
-                                        <?php echo (($menuItem['parent_id'] ?? null) == ($item['id'] ?? 0)) ? 'selected' : ''; ?>>
-                                    <?php echo Security::sanitize($item['nom'] ?? ''); ?>
-                                </option>
-                            <?php endif; ?>
                         <?php endforeach; ?>
                     <?php endif; ?>
                 </select>

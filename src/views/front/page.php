@@ -1,20 +1,21 @@
 <?php
 // Vérifier que $pageData est défini
-if (!isset($pageData)) {
-    error_log("Erreur: pageData n'est pas défini dans page.php");
-    $pageData = [];
+if (!isset($pageData) || empty($pageData)) {
+    $pageData = ['titre' => 'Page non trouvée', 'contenu' => 'Contenu non disponible', 'id' => null];
 }
 
 // S'assurer que Security est chargé
 if (!class_exists('Security')) {
-    require_once __DIR__ . '/../../src/utils/Security.php';
+    require_once __DIR__ . '/../../utils/Security.php';
 }
 
 // Récupérer les images associées à la page
 $pageImages = [];
 if (!empty($pageData['id'])) {
     try {
-        require_once __DIR__ . '/../../src/models/Media.php';
+        if (!class_exists('Media')) {
+            require_once __DIR__ . '/../../models/Media.php';
+        }
         if (!isset($db)) {
             require_once __DIR__ . '/../../../config/db.php';
             $db = getDatabaseConnection();

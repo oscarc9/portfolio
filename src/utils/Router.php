@@ -153,7 +153,9 @@ class Router {
                 'menu' => ['MenuController', 'list'],
                 'menu/create' => ['MenuController', 'create'],
                 'menu/edit' => ['MenuController', 'edit'],
-                'menu/delete' => ['MenuController', 'delete']
+                'menu/delete' => ['MenuController', 'delete'],
+                'contact' => ['ContactController', 'listMessages'],
+                'contact/reply' => ['ContactController', 'reply']
             ];
             
             if (isset($adminRoutes[$adminPath])) {

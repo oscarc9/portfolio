@@ -60,23 +60,6 @@ $basePath = getBasePath();
             </div>
 
             <div class="form-group">
-                <label for="parent_id">Page parente (optionnel)</label>
-                <select id="parent_id" name="parent_id">
-                    <option value="">Aucune (page racine)</option>
-                    <?php if (!empty($allPages)): ?>
-                        <?php foreach ($allPages as $p): ?>
-                            <?php if (($p['id'] ?? 0) != ($page['id'] ?? 0)): ?>
-                                <option value="<?php echo (int)($p['id'] ?? 0); ?>" 
-                                        <?php echo (($page['parent_id'] ?? null) == ($p['id'] ?? 0)) ? 'selected' : ''; ?>>
-                                    <?php echo Security::sanitize($p['titre'] ?? ''); ?>
-                                </option>
-                            <?php endif; ?>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </select>
-            </div>
-
-            <div class="form-group">
                 <label for="contenu">Contenu</label>
                 <textarea id="contenu" name="contenu" rows="15" class="large"><?php echo htmlspecialchars($page['contenu'] ?? ''); ?></textarea>
             </div>

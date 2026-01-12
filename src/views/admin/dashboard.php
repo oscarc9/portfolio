@@ -80,6 +80,10 @@ if (!isset($menuCount)) {
                 <i class="ri-menu-line"></i>
                 <span>Gérer le menu</span>
             </a>
+            <a href="<?php echo htmlspecialchars($basePath); ?>admin/contact" class="admin-menu-item">
+                <i class="ri-mail-line"></i>
+                <span>Messages de contact</span>
+            </a>
             <a href="<?php echo htmlspecialchars($basePath); ?>accueil" class="admin-menu-item">
                 <i class="ri-home-line"></i>
                 <span>Voir le site</span>
